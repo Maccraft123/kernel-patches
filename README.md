@@ -10,7 +10,7 @@ This repository should see releases on every kernel release(including rc) in for
 - Odroid Go Super
 - Anbernic RG351M
 
-## Devices fully upstreamed:
+## Devices fully upstreamed, without need for patches:
 - Odroid Go Advance(since almost forever)
 - Aya Neo Next(since v5.19)
 - Aya Neo Air(since v6.1)
