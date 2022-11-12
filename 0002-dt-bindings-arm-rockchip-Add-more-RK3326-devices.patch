@@ -1,0 +1,46 @@
+From dd56379178ef0f635fcb58fb9aeef22278d6a103 Mon Sep 17 00:00:00 2001
+From: Maya Matuszczyk <maccraft123mc@gmail.com>
+Date: Sat, 12 Nov 2022 13:16:18 +0100
+Subject: [PATCH 2/5] dt-bindings: arm: rockchip: Add more RK3326 devices
+
+Signed-off-by: Maya Matuszczyk <maccraft123mc@gmail.com>
+---
+ .../devicetree/bindings/arm/rockchip.yaml         | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/arm/rockchip.yaml b/Documentation/devicetree/bindings/arm/rockchip.yaml
+index c6c69a4e3777..d2748826cf39 100644
+--- a/Documentation/devicetree/bindings/arm/rockchip.yaml
++++ b/Documentation/devicetree/bindings/arm/rockchip.yaml
+@@ -30,6 +30,11 @@ properties:
+           - const: amarula,vyasa-rk3288
+           - const: rockchip,rk3288
+ 
++      - description: Anbernic RG351M
++        items:
++          - const: anbernic,rg351m
++          - const: rockchip,rk3326
++
+       - description: Anbernic RG353P
+         items:
+           - const: anbernic,rg353p
+@@ -468,6 +473,16 @@ properties:
+           - const: hardkernel,rk3326-odroid-go2
+           - const: rockchip,rk3326
+ 
++      - description: Hardkernel Odroid Go Advance Black Edition
++        items:
++          - const: hardkernel,rk3326-odroid-go2-v11
++          - const: rockchip,rk3326
++
++      - description: Hardkernel Odroid Go Super
++        items:
++          - const: hardkernel,rk3326-odroid-go3
++          - const: rockchip,rk3326
++
+       - description: Hugsun X99 TV Box
+         items:
+           - const: hugsun,x99
+-- 
+2.38.1
+
