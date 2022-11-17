@@ -1,17 +1,17 @@
-From 65ebbba5f59a26d96b5ce9aa88efd1896d72cc3f Mon Sep 17 00:00:00 2001
+From 825280184ee10eb3eae43c944e1cafde6fe055a7 Mon Sep 17 00:00:00 2001
 From: Maya Matuszczyk <maccraft123mc@gmail.com>
-Date: Sat, 12 Nov 2022 13:18:04 +0100
-Subject: [PATCH 4/5] arm64: dts: rockchip: Add Odroid Go Super
+Date: Thu, 17 Nov 2022 20:47:40 +0100
+Subject: [PATCH v4 4/5] arm64: dts: rockchip: Add Odroid Go Super
 
 This device is another revision of Odroid Go Advance, with added two
 volume buttons, a second analog stick and a bigger screen that isn't yet
-supported in the Mainline Kernel.
+supported in the mainline kernel.
 
 Signed-off-by: Maya Matuszczyk <maccraft123mc@gmail.com>
 ---
  arch/arm64/boot/dts/rockchip/Makefile         |   1 +
- .../boot/dts/rockchip/rk3326-odroid-go3.dts   | 161 ++++++++++++++++++
- 2 files changed, 162 insertions(+)
+ .../boot/dts/rockchip/rk3326-odroid-go3.dts   | 185 ++++++++++++++++++
+ 2 files changed, 186 insertions(+)
  create mode 100644 arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts
 
 diff --git a/arch/arm64/boot/dts/rockchip/Makefile b/arch/arm64/boot/dts/rockchip/Makefile
@@ -28,10 +28,10 @@ index 12446f531d29..142c83d2e5aa 100644
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-nanopi-r2s.dtb
 diff --git a/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts b/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts
 new file mode 100644
-index 000000000000..4b6c896d8abd
+index 000000000000..69aecc5c76b5
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts
-@@ -0,0 +1,161 @@
+@@ -0,0 +1,185 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2019 Hardkernel Co., Ltd
@@ -47,7 +47,6 @@ index 000000000000..4b6c896d8abd
 +	compatible = "hardkernel,rk3326-odroid-go3", "rockchip,rk3326";
 +
 +	joystick_mux_controller: mux-controller {
-+		status = "okay";
 +		compatible = "gpio-mux";
 +		pinctrl = <&mux_en_pins>;
 +		#mux-control-cells = <0>;
@@ -57,7 +56,6 @@ index 000000000000..4b6c896d8abd
 +	};
 +
 +	joystick_mux: adc-mux {
-+		status = "okay";
 +		compatible = "io-channel-mux";
 +		io-channels = <&saradc 1>;
 +		io-channel-names = "parent";
@@ -128,7 +126,30 @@ index 000000000000..4b6c896d8abd
 +					<3649470 20>, <3635260 15>, <3616920 10>, <3592440 5>,
 +					<3574170 0>;
 +	};
++
++	gpio-keys-vol {
++		compatible = "gpio-keys";
++		autorepeat;
++		pinctrl-0 = <&btn_pins_vol>;
++		pinctrl-names = "default";
++
++		button-vol-down {
++			gpios = <&gpio2 RK_PA1 GPIO_ACTIVE_LOW>;
++			label = "VOLUMEDOWN";
++			linux,code = <KEY_VOLUMEDOWN>;
++		};
++
++		button-volume-up {
++			gpios = <&gpio2 RK_PA0 GPIO_ACTIVE_LOW>;
++			label = "VOLUMEUP";
++			linux,code = <KEY_VOLUMEUP>;
++		};
++	};
 +};
++
++/* f1 and f2 conflict with volume buttons */
++/delete-node/ &btn_f1;
++/delete-node/ &btn_f2;
 +
 +&builtin_gamepad {
 +	button-sw19 {
@@ -173,8 +194,6 @@ index 000000000000..4b6c896d8abd
 +					<1 RK_PB5 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<1 RK_PB6 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<1 RK_PB7 RK_FUNC_GPIO &pcfg_pull_up>,
-+					<2 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>,
-+					<2 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<2 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<2 RK_PA3 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<2 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>,
@@ -185,6 +204,11 @@ index 000000000000..4b6c896d8abd
 +					<3 RK_PB2 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>,
 +					<3 RK_PB7 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		btn_pins_vol: btn-pins-vol {
++			rockchip,pins = <2 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>,
++					<2 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>;
 +		};
 +	};
 +	joystick {

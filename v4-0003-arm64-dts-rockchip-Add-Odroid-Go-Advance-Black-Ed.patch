@@ -1,7 +1,8 @@
-From 223486b00e0fce1b0db1c4ce49925004851a94c8 Mon Sep 17 00:00:00 2001
+From cadffa80dd032f60b4b227d37bee61d237e92de8 Mon Sep 17 00:00:00 2001
 From: Maya Matuszczyk <maccraft123mc@gmail.com>
-Date: Sat, 12 Nov 2022 13:17:01 +0100
-Subject: [PATCH 3/5] arm64: dts: rockchip: Add Odroid Go Advance Black Edition
+Date: Thu, 17 Nov 2022 20:46:07 +0100
+Subject: [PATCH v4 3/5] arm64: dts: rockchip: Add Odroid Go Advance Black
+ Edition
 
 This device is a minor revision of the origin Odroid Go Advance, with
 added two more buttons and a WiFi card

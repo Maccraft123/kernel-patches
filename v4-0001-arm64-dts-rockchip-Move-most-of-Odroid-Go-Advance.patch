@@ -1,8 +1,8 @@
-From eedb1a7e14c1f2739aa3fd39a5d82bad6f2a6838 Mon Sep 17 00:00:00 2001
+From 7c3001077aabb794e9e680ac2c573809c3bb0c6c Mon Sep 17 00:00:00 2001
 From: Maya Matuszczyk <maccraft123mc@gmail.com>
-Date: Sat, 12 Nov 2022 13:11:14 +0100
-Subject: [PATCH 1/5] arm64: dts: rockchip: Move most of Odroid Go Advance DTS
- into a DTSI
+Date: Thu, 17 Nov 2022 20:44:07 +0100
+Subject: [PATCH v4 1/5] arm64: dts: rockchip: Move most of Odroid Go Advance
+ DTS into a DTSI
 
 To support more devices that are clones of this device or minor
 revisions without duplication move msot of go2's dts into a dtsi file.
@@ -16,7 +16,7 @@ Signed-off-by: Maya Matuszczyk <maccraft123mc@gmail.com>
 
 diff --git a/arch/arm64/boot/dts/rockchip/rk3326-odroid-go.dtsi b/arch/arm64/boot/dts/rockchip/rk3326-odroid-go.dtsi
 new file mode 100644
-index 000000000000..bab99b1b4299
+index 000000000000..fbc6bfbaa5c1
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3326-odroid-go.dtsi
 @@ -0,0 +1,600 @@
@@ -93,32 +93,32 @@ index 000000000000..bab99b1b4299
 +			label = "BTN-X";
 +			linux,code = <BTN_NORTH>;
 +		};
-+		button-sw9 {
++		btn_f1: button-sw9 {
 +			gpios = <&gpio2 RK_PA0 GPIO_ACTIVE_LOW>;
 +			label = "F1";
 +			linux,code = <BTN_TRIGGER_HAPPY1>;
 +		};
-+		button-sw10 {
++		btn_f2: button-sw10 {
 +			gpios = <&gpio2 RK_PA1 GPIO_ACTIVE_LOW>;
 +			label = "F2";
 +			linux,code = <BTN_TRIGGER_HAPPY2>;
 +		};
-+		button-sw11 {
++		btn_f3: button-sw11 {
 +			gpios = <&gpio2 RK_PA2 GPIO_ACTIVE_LOW>;
 +			label = "F3";
 +			linux,code = <BTN_TRIGGER_HAPPY3>;
 +		};
-+		button-sw12 {
++		btn_f4: button-sw12 {
 +			gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_LOW>;
 +			label = "F4";
 +			linux,code = <BTN_TRIGGER_HAPPY4>;
 +		};
-+		button-sw13 {
++		btn_f5: button-sw13 {
 +			gpios = <&gpio2 RK_PA4 GPIO_ACTIVE_LOW>;
 +			label = "F5";
 +			linux,code = <BTN_TRIGGER_HAPPY5>;
 +		};
-+		button-sw14 {
++		btn_f6: button-sw14 {
 +			gpios = <&gpio2 RK_PA5 GPIO_ACTIVE_LOW>;
 +			label = "F6";
 +			linux,code = <BTN_TRIGGER_HAPPY6>;

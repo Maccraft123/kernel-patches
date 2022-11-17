@@ -1,7 +1,10 @@
-From dd56379178ef0f635fcb58fb9aeef22278d6a103 Mon Sep 17 00:00:00 2001
+From d3b8ee384801029d8af7b504a7a384db20599820 Mon Sep 17 00:00:00 2001
 From: Maya Matuszczyk <maccraft123mc@gmail.com>
-Date: Sat, 12 Nov 2022 13:16:18 +0100
-Subject: [PATCH 2/5] dt-bindings: arm: rockchip: Add more RK3326 devices
+Date: Thu, 17 Nov 2022 20:44:38 +0100
+Subject: [PATCH v4 2/5] dt-bindings: arm: rockchip: Add more RK3326 devices
+
+This patch adds Anbernic RG351M, Odroid Go Advance Black Edition and
+Odroid Go Super into dt bindings.
 
 Signed-off-by: Maya Matuszczyk <maccraft123mc@gmail.com>
 ---

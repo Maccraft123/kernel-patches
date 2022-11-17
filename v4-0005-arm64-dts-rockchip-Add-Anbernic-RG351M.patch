@@ -1,13 +1,16 @@
-From 276600b10590f28b45a24e20a35c315255b1cc8f Mon Sep 17 00:00:00 2001
+From c6ae3a06f828dab5a51a90847a9116524bc5bd1e Mon Sep 17 00:00:00 2001
 From: Maya Matuszczyk <maccraft123mc@gmail.com>
-Date: Sat, 12 Nov 2022 13:27:44 +0100
-Subject: [PATCH 5/5] arm64: dts: rockchip: Add Anbernic RG351M
+Date: Thu, 17 Nov 2022 20:50:33 +0100
+Subject: [PATCH v4 5/5] arm64: dts: rockchip: Add Anbernic RG351M
 
 This device is a clone of Odroid Go Advance, with added PWM motor, internal
 gamepad connected on USB instead of just having it be on GPIO + ADC, and
 missing battery shunt resistor.
+Due to missing shunt resistor and lack of a workaroun in rk817_charger
+driver rk817_charger is not enabled in dts.
 
-There's also an LED on GPIO 77(I *guess* PB5 on &gpio2), that is controlled in a weird way:
+There's also an LED on GPIO 77(I *guess* PB5 on &gpio2),
+that is controlled in a weird way:
 
 - It is set to red by setting output value to 1
 - Set to green by setting output value to 0
@@ -19,8 +22,8 @@ driver, for now it's just left out.
 Signed-off-by: Maya Matuszczyk <maccraft123mc@gmail.com>
 ---
  arch/arm64/boot/dts/rockchip/Makefile         |  1 +
- .../dts/rockchip/rk3326-anbernic-rg351m.dts   | 54 +++++++++++++++++++
- 2 files changed, 55 insertions(+)
+ .../dts/rockchip/rk3326-anbernic-rg351m.dts   | 33 +++++++++++++++++++
+ 2 files changed, 34 insertions(+)
  create mode 100644 arch/arm64/boot/dts/rockchip/rk3326-anbernic-rg351m.dts
 
 diff --git a/arch/arm64/boot/dts/rockchip/Makefile b/arch/arm64/boot/dts/rockchip/Makefile
@@ -37,10 +40,10 @@ index 142c83d2e5aa..b379516c15eb 100644
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go3.dtb
 diff --git a/arch/arm64/boot/dts/rockchip/rk3326-anbernic-rg351m.dts b/arch/arm64/boot/dts/rockchip/rk3326-anbernic-rg351m.dts
 new file mode 100644
-index 000000000000..7f4726d4130e
+index 000000000000..61b31688b469
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3326-anbernic-rg351m.dts
-@@ -0,0 +1,54 @@
+@@ -0,0 +1,33 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2019 Hardkernel Co., Ltd
@@ -54,25 +57,6 @@ index 000000000000..7f4726d4130e
 +/ {
 +	model = "Anbernic RG351M";
 +	compatible = "anbernic,rg351m", "rockchip,rk3326";
-+
-+	battery: battery {
-+		compatible = "simple-battery";
-+		charge-full-design-microamp-hours = <3450000>;
-+		charge-term-current-microamp = <300000>;
-+		constant-charge-current-max-microamp = <2000000>;
-+		constant-charge-voltage-max-microvolt = <4200000>;
-+		factory-internal-resistance-micro-ohms = <100000>;
-+		voltage-max-design-microvolt = <4100000>;
-+		voltage-min-design-microvolt = <3500000>;
-+
-+		ocv-capacity-celsius = <20>;
-+		ocv-capacity-table-0 =  <4046950 100>, <4001920 95>, <3967900 90>, <3919950 85>,
-+					<3888450 80>, <3861850 75>, <3831540 70>, <3799130 65>,
-+					<3768190 60>, <3745650 55>, <3726610 50>, <3711630 45>,
-+					<3696720 40>, <3685660 35>, <3674950 30>, <3663050 25>,
-+					<3649470 20>, <3635260 15>, <3616920 10>, <3592440 5>,
-+					<3574170 0>;
-+	};
 +
 +	vibrator {
 +		compatible = "pwm-vibrator";
@@ -92,9 +76,7 @@ index 000000000000..7f4726d4130e
 +	status = "okay";
 +};
 +
-+&rk817_charger {
-+	monitored-battery = <&battery>;
-+};
++/delete-node/ &rk817_charger;
 -- 
 2.38.1
 
